@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Filament\Resources\ShopResource\Api\Transformers;
 
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -18,6 +19,12 @@ class ShopTransformer extends JsonResource
      */
     public function toArray($request)
     {
-        return $this->resource->toArray();
+        return [
+            'id' => $this->resource->id,
+            'name' => $this->resource->name,
+            'slug' => $this->resource->slug,
+            'logo' => $this->resource->logo ? url('storage/' . $this->resource->logo) : null,
+            'website' => $this->resource->website,
+        ];
     }
 }

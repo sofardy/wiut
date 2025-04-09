@@ -24,7 +24,8 @@ class ProductTransformer extends JsonResource
             'title' => $this->resource->title,
             'slug' => $this->resource->slug,
             'description' => $this->resource->description,
-            'image' => $this->resource->image,
+            'image' => $this->resource->image_url,
+            'price' => $this->resource->formatted_min_price,
             'category' => [
                 'id' => $this->resource->category->id ?? null,
                 'name' => $this->resource->category->name ?? null,
@@ -32,7 +33,7 @@ class ProductTransformer extends JsonResource
             'offers' => $this->resource->offers->map(function ($offer) {
                 return [
                     'id' => $offer->id,
-                    'price' => $offer->price,
+                    'price' => $offer->formatted_price,
                     'updated_at_price' => $offer->updated_at_price,
                     'shop' => $offer->shop->name ?? null,
                     'shop_product_url' => $offer->shop_product_url,

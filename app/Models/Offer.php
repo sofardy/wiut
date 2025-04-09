@@ -31,4 +31,14 @@ class Offer extends Model
     {
         return $this->belongsTo(Shop::class);
     }
+
+    public function getFormattedPriceAttribute()
+    {
+        return number_format($this->price, 0, '.', ' ');
+    }
+
+    public static function getTotalSum()
+    {
+        return self::sum('price');
+    }
 }

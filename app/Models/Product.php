@@ -5,10 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Traits\HasSlug;
+use App\Traits\HasImageUrl;
 
 class Product extends Model
 {
-    use HasFactory, HasSlug;
+    use HasFactory, HasSlug, HasImageUrl;
 
     protected $fillable = [
         'title',
@@ -38,5 +39,11 @@ class Product extends Model
     public function attributeValues()
     {
         return $this->hasMany(ProductAttributeValue::class);
+    }
+
+    public function getFormattedMinPriceAttribute()
+    {
+        $minPrice = $this->offers()->min('price');
+        return $minPrice ? number_format($minPrice, 0, '.', ' ') : null;
     }
 }

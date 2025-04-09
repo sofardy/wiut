@@ -1,26 +1,27 @@
 <?php
 
-namespace App\Filament\Resources\ProductResource\Api\Handlers;
+namespace App\Filament\Resources\OfferResource\Api\Handlers;
 
 use App\Filament\Resources\SettingResource;
-use App\Filament\Resources\ProductResource;
+use App\Filament\Resources\OfferResource;
 use Rupadana\ApiService\Http\Handlers;
 use Spatie\QueryBuilder\QueryBuilder;
 use Illuminate\Http\Request;
-use App\Filament\Resources\ProductResource\Api\Transformers\ProductTransformer;
+use App\Filament\Resources\OfferResource\Api\Transformers\OfferTransformer;
 
 class DetailHandler extends Handlers
 {
     protected static string $keyName = 'slug';
     public static string | null $uri = '/{slug}';
-    public static string | null $resource = ProductResource::class;
+    public static string | null $resource = OfferResource::class;
     public static bool $public = true;
 
+
     /**
-     * Show Product
+     * Show Offer
      *
      * @param Request $request
-     * @return ProductTransformer
+     * @return OfferTransformer
      */
     public function handler(Request $request)
     {
@@ -35,6 +36,6 @@ class DetailHandler extends Handlers
 
         if (!$query) return static::sendNotFoundResponse();
 
-        return new ProductTransformer($query);
+        return new OfferTransformer($query);
     }
 }

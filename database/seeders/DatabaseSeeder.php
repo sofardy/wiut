@@ -32,12 +32,12 @@ class DatabaseSeeder extends Seeder
         );
 
 
-        Category::factory()->count(10)->create();
-        Shop::factory()->count(10)->create();
-        Product::factory()->count(10)->create();
-        Offer::factory()->count(60)->create();
-        ProductAttribute::factory()->count(10)->create();
-        ProductAttributeValue::factory()->count(50)->create();
-        Promotion::factory()->count(10)->create();
+        // Category::factory()->count(10)->create();
+        // Shop::factory()->count(10)->create();
+        // Product::factory()->count(10)->create();
+        // Offer::factory()->count(60)->create();
+        // ProductAttribute::factory()->count(10)->create();
+        // ProductAttributeValue::factory()->count(50)->create();
+        // Promotion::factory()->count(10)->create();
     }
 }

@@ -1,22 +1,21 @@
 <?php
 
-namespace App\Filament\Resources\ShopResource\Api\Handlers;
+namespace App\Filament\Resources\PromotionResource\Api\Handlers;
 
 use Illuminate\Http\Request;
 use Rupadana\ApiService\Http\Handlers;
 use Spatie\QueryBuilder\QueryBuilder;
-use App\Filament\Resources\ShopResource;
-use App\Filament\Resources\ShopResource\Api\Transformers\ShopTransformer;
+use App\Filament\Resources\PromotionResource;
+use App\Filament\Resources\PromotionResource\Api\Transformers\PromotionTransformer;
 
 class PaginationHandler extends Handlers
 {
     public static string | null $uri = '/';
-    public static string | null $resource = ShopResource::class;
+    public static string | null $resource = PromotionResource::class;
     public static bool $public = true;
 
-
     /**
-     * List of Shop
+     * List of Promotion
      *
      * @param Request $request
      * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
@@ -33,6 +32,6 @@ class PaginationHandler extends Handlers
             ->paginate(request()->query('per_page'))
             ->appends(request()->query());
 
-        return ShopTransformer::collection($query);
+        return PromotionTransformer::collection($query);
     }
 }

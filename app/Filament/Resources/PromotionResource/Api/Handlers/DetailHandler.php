@@ -1,27 +1,26 @@
 <?php
 
-namespace App\Filament\Resources\CategoryResource\Api\Handlers;
+namespace App\Filament\Resources\PromotionResource\Api\Handlers;
 
 use App\Filament\Resources\SettingResource;
-use App\Filament\Resources\CategoryResource;
+use App\Filament\Resources\PromotionResource;
 use Rupadana\ApiService\Http\Handlers;
 use Spatie\QueryBuilder\QueryBuilder;
 use Illuminate\Http\Request;
-use App\Filament\Resources\CategoryResource\Api\Transformers\CategoryTransformer;
+use App\Filament\Resources\PromotionResource\Api\Transformers\PromotionTransformer;
 
 class DetailHandler extends Handlers
 {
-    protected static string $keyName = 'slug';
     public static string | null $uri = '/{slug}';
-    public static string | null $resource = CategoryResource::class;
+    public static string | null $resource = PromotionResource::class;
     public static bool $public = true;
 
 
     /**
-     * Show Category
+     * Show Promotion
      *
      * @param Request $request
-     * @return CategoryTransformer
+     * @return PromotionTransformer
      */
     public function handler(Request $request)
     {
@@ -36,6 +35,6 @@ class DetailHandler extends Handlers
 
         if (!$query) return static::sendNotFoundResponse();
 
-        return new CategoryTransformer($query);
+        return new PromotionTransformer($query);
     }
 }

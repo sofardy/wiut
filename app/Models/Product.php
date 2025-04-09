@@ -19,6 +19,9 @@ class Product extends Model
         'category_id',
     ];
 
+    public static $allowedFilters = ['category_id', 'title']; // Разрешаем фильтрацию
+
+
     public function category()
     {
         return $this->belongsTo(Category::class);

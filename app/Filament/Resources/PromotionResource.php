@@ -2,9 +2,9 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\ProductResource\Pages;
-use App\Filament\Resources\ProductResource\RelationManagers;
-use App\Models\Product;
+use App\Filament\Resources\PromotionResource\Pages;
+use App\Filament\Resources\PromotionResource\RelationManagers;
+use App\Models\Promotion;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -12,11 +12,10 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
-use Spatie\QueryBuilder\AllowedFilter;
 
-class ProductResource extends Resource
+class PromotionResource extends Resource
 {
-    protected static ?string $model = Product::class;
+    protected static ?string $model = Promotion::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
@@ -25,23 +24,11 @@ class ProductResource extends Resource
         return $form
             ->schema([
                 Forms\Components\TextInput::make('title')
-                    ->required()
                     ->maxLength(255),
-                Forms\Components\TextInput::make('slug')
-                    ->disabled(),
-                Forms\Components\Textarea::make('description')
-                    ->columnSpanFull(),
                 Forms\Components\FileUpload::make('image')
+                    ->directory('promotion')
                     ->required()
-                    ->preserveFilenames()
-                    ->directory('product')
-                    ->visibility('public')
                     ->image(),
-                Forms\Components\Select::make('category_id')
-                    ->relationship('category', 'name')
-                    ->searchable()
-                    ->preload()
-                    ->required(),
             ]);
     }
 
@@ -49,13 +36,9 @@ class ProductResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\ImageColumn::make('image'),
                 Tables\Columns\TextColumn::make('title')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('category.name')
-                    ->label('Category')
-                    ->sortable()
-                    ->searchable(),
+                Tables\Columns\ImageColumn::make('image'),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
@@ -81,24 +64,16 @@ class ProductResource extends Resource
     public static function getRelations(): array
     {
         return [
-            \App\Filament\Resources\ProductResource\RelationManagers\OffersRelationManager::class,
-            \App\Filament\Resources\ProductResource\RelationManagers\AttributesRelationManager::class,
+            //
         ];
     }
 
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListProducts::route('/'),
-            'create' => Pages\CreateProduct::route('/create'),
-            'edit' => Pages\EditProduct::route('/{record}/edit'),
-        ];
-    }
-
-    public static function allowedFilters(): array
-    {
-        return [
-            AllowedFilter::exact('category_id'),
+            'index' => Pages\ListPromotions::route('/'),
+            'create' => Pages\CreatePromotion::route('/create'),
+            'edit' => Pages\EditPromotion::route('/{record}/edit'),
         ];
     }
 }

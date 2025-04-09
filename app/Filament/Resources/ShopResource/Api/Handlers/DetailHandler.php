@@ -11,8 +11,10 @@ use App\Filament\Resources\ShopResource\Api\Transformers\ShopTransformer;
 
 class DetailHandler extends Handlers
 {
-    public static string | null $uri = '/{id}';
+    protected static string $keyName = 'slug';
+    public static string | null $uri = '/{slug}';
     public static string | null $resource = ShopResource::class;
+    public static bool $public = true;
 
 
     /**
@@ -23,12 +25,12 @@ class DetailHandler extends Handlers
      */
     public function handler(Request $request)
     {
-        $id = $request->route('id');
-        
+        $slug = $request->route('slug');
+
         $query = static::getEloquentQuery();
 
         $query = QueryBuilder::for(
-            $query->where(static::getKeyName(), $id)
+            $query->where(static::getKeyName(), $slug)
         )
             ->first();
 

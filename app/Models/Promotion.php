@@ -2,17 +2,20 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
-use App\Traits\HasImageUrl;
+use Illuminate\Database\Eloquent\Factories\HasFactory; // Подключаем трейт для работы с фабриками
+use Illuminate\Database\Eloquent\Model; // Подключаем базовый класс модели
+use App\Traits\HasImageUrl; // Подключаем трейт для работы с URL изображения
 
 class Promotion extends Model
 {
-    /** @use HasFactory<\Database\Factories\PromotionFactory> */
-    use HasFactory, HasImageUrl;
+    /** 
+     * Используем трейт HasFactory для генерации фабрик.
+     * @use HasFactory<\Database\Factories\PromotionFactory> 
+     */
+    use HasFactory, HasImageUrl; // HasImageUrl добавляет функционал для работы с изображениями
 
     protected $fillable = [
-        'title',
-        'image',
+        'title', // Название промоакции
+        'image', // URL изображения, связанного с промоакцией
     ];
 }

@@ -7,6 +7,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable; // Базовый кла
 use Illuminate\Notifications\Notifiable; // Подключаем трейт для работы с уведомлениями
 use Filament\Models\Contracts\FilamentUser; // Интерфейс для проверки доступа к панели Filament
 use Filament\Panel; // Класс панели Filament
+use Laravel\Sanctum\HasApiTokens; // Трейт для поддержки Sanctum API токенов
 
 class User extends Authenticatable implements FilamentUser
 {
@@ -14,7 +15,7 @@ class User extends Authenticatable implements FilamentUser
      * Используем трейт HasFactory для генерации фабрик.
      * @use HasFactory<\Database\Factories\UserFactory> 
      */
-    use HasFactory, Notifiable; // HasFactory для фабрик, Notifiable для уведомлений
+    use HasApiTokens, HasFactory, Notifiable; // HasApiTokens для Sanctum, HasFactory для фабрик, Notifiable для уведомлений
 
     /**
      * Поля, разрешенные для массового заполнения (mass assignment).
@@ -24,6 +25,7 @@ class User extends Authenticatable implements FilamentUser
     protected $fillable = [
         'name',     // Имя пользователя
         'email',    // Электронная почта пользователя
+        'phone',    // Телефон пользователя
         'password', // Пароль пользователя
     ];
 
